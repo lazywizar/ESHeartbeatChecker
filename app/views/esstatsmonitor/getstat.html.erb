@@ -1,2 +1,32 @@
-<h1>ES Stats</h1>
-<p> <%= @stats %></p>
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+
+<head>
+  <title>ElasticSearch Nodes Stats</title>
+</head>
+<body>
+<h1>ElasticSearch Nodes Stats</h1>
+<table class="pure-table">
+  <tr class="">
+    <th><%= "Node Name"  %>  </th>
+    <th><%= "cpu_percentage" %>  </th>
+    <th><%= "heap_used_percent" %>  </th>
+    <th><%= "free_in_MB" %>  </th>
+    <th><%= "index_time_in_millis" %>  </th>
+    <th><%= "delete_time_in_millis" %>  </th>
+  </tr>
+  <% @stats.each do |element| %>
+    <tr>
+      <td><%= "#{element["name"]}"  %>  </td>
+      <td><%= "#{element["cpu_percentage"]}" %></td>
+      <td><%= "#{element["heap_used_percent"]}" %></td>
+      <td><%= "#{element["free_in_bytes"]}" %></td>
+      <td><%= "#{element["index_time_in_millis"]}" %></td>
+      <td><%= "#{element["delete_time_in_millis"]}" %> </td>
+    </tr>
+  <% end %>
+
+</table>
+</body>
+</html>
