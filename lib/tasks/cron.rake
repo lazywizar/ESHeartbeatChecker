@@ -1,5 +1,5 @@
 task :cron => :environment do
-  puts "Pulling new requests..."
-  #  HeartbeatCheckerTask.check
+  puts "Checking health..."
+  HeartbeatCheckerTask.check
   puts "done."
 end

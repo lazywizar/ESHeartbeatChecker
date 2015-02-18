@@ -1,8 +1,8 @@
 require 'mail'
-require 'whenever'
 
 class HeartbeatCheckerTask
-  def check
+  def self.check
+    puts "Executing the heartbeat checker"
     #@ES_HOST="192.168.1.143:9200"
     @ES_HOST="ec2-23-22-8-207.compute-1.amazonaws.com:9200"
 
