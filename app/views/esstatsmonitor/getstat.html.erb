@@ -1,32 +1,43 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-
-<head>
-  <title>ElasticSearch Nodes Stats</title>
-</head>
-<body>
 <h1>ElasticSearch Nodes Stats</h1>
-<table class="pure-table">
-  <tr class="">
-    <th><%= "Node Name"  %>  </th>
-    <th><%= "cpu_percentage" %>  </th>
-    <th><%= "heap_used_percent" %>  </th>
-    <th><%= "free_in_MB" %>  </th>
-    <th><%= "index_time_in_millis" %>  </th>
-    <th><%= "delete_time_in_millis" %>  </th>
-  </tr>
-  <% @stats.each do |element| %>
-    <tr>
-      <td><%= "#{element["name"]}"  %>  </td>
-      <td><%= "#{element["cpu_percentage"]}" %></td>
-      <td><%= "#{element["heap_used_percent"]}" %></td>
-      <td><%= "#{element["free_in_bytes"]}" %></td>
-      <td><%= "#{element["index_time_in_millis"]}" %></td>
-      <td><%= "#{element["delete_time_in_millis"]}" %> </td>
-    </tr>
-  <% end %>
+<div>
+  <p>
+      <% if @product_avgQueryTime > 10000 %>
+        <img src="/assets/failed.jpg" width="20" height="20"  />
+      <% else %>
+        <img src="/assets/success.jpg" width="20" height="20"  />
+      <% end %> Search Heartbeat Latency : <%= @product_avgQueryTime %> ms
+    </p>
+</div>
+</br>
+<table class="pure-table pure-table-horizontal">
+  <thread>
+      <tr class="pure-table-odd">
+        <th><%=   %>  </th>
+        <th><%= "Node Name"  %>  </th>
+        <th><%= "cpu_percentage" %>  </th>
+        <th><%= "heap_used_percent" %>  </th>
+        <th><%= "free_in_MB" %>  </th>
+        <th><%= "index_time_in_millis" %>  </th>
+        <th><%= "delete_time_in_millis" %>  </th>
+      </tr>
+  </thread>
+  <tbody>
+      <% @stats.each do |element| %>
+        <tr >
+          <td><% if element["status"] == 'green' %>
+                <img src="/assets/success.jpg" width="20" height="20"  />
+              <% else %>
+                <img src="/assets/failed.jpg" width="20" height="20"  />
+              <% end %>
+          </td>
 
+          <td><%= "#{element["name"]}"  %>  </td>
+          <td><%= "#{element["cpu_percentage"]}" %></td>
+          <td><%= "#{element["heap_used_percent"]}" %></td>
+          <td><%= "#{element["free_in_bytes"]}" %></td>
+          <td><%= "#{element["index_time_in_millis"]}" %></td>
+          <td><%= "#{element["delete_time_in_millis"]}" %> </td>
+        </tr>
+      <% end %>
+  </tbody>
 </table>
-</body>
-</html>
